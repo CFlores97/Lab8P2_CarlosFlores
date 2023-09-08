@@ -1,7 +1,9 @@
 
 package lab8p2_carlosflores;
 
-public class Evento {
+import java.io.Serializable;
+
+public class Evento implements Serializable {
     private String estilo;
     private long distancia;
 

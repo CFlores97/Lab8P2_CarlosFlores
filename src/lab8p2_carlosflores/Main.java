@@ -1,21 +1,20 @@
-
 package lab8p2_carlosflores;
 
+import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JViewport;
 import javax.swing.table.DefaultTableModel;
 
-
 public class Main extends javax.swing.JFrame {
 
-    
     public Main() {
         initComponents();
         setLocationRelativeTo(null);
+        llenarCbPaises();
+        
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -71,12 +70,6 @@ public class Main extends javax.swing.JFrame {
         jLabel2.setText("Medallas:");
 
         jLabel3.setText("Nadadores:");
-
-        tf_medallasPais.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_medallasPaisActionPerformed(evt);
-            }
-        });
 
         btn_addPais.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_addPais.setText("Add");
@@ -221,41 +214,17 @@ public class Main extends javax.swing.JFrame {
 
         jLabel7.setText("Medallas:");
 
-        tf_medallasNadador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_medallasNadadorActionPerformed(evt);
-            }
-        });
-
         jLabel8.setText("Nacionalidad:");
 
         jLabel9.setText("Edad:");
 
-        tf_edad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_edadActionPerformed(evt);
-            }
-        });
-
         jLabel10.setText("Estatura:");
-
-        tf_estatura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_estaturaActionPerformed(evt);
-            }
-        });
 
         jLabel11.setText("Estilo de natacion:");
 
         jLabel12.setText("Distancia a competir:");
 
         jLabel13.setText("Tiempo:");
-
-        tf_tiempo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_tiempoActionPerformed(evt);
-            }
-        });
 
         btn_agregarNadador.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_agregarNadador.setText("Add");
@@ -385,103 +354,107 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tf_medallasPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_medallasPaisActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_medallasPaisActionPerformed
-
-    private void tf_medallasNadadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_medallasNadadorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_medallasNadadorActionPerformed
-
-    private void tf_edadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_edadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_edadActionPerformed
-
-    private void tf_estaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_estaturaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_estaturaActionPerformed
-
-    private void tf_tiempoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_tiempoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_tiempoActionPerformed
-
     private void btn_addPaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addPaisMouseClicked
-        
+
         //Agregar al combobox
         DefaultComboBoxModel model = (DefaultComboBoxModel) cb_paises.getModel();
-        Pais country = new Pais(
-                tf_nombrePais.getText(), 
-                Integer.parseInt(tf_medallasPais.getText()));
-        
-        model.addElement(country);
-        
-        cb_paises.setModel(model);
-        
-        JOptionPane.showMessageDialog(this, "Agregado exitosamente!");
+
+        try {
+            Pais country = new Pais(
+                    tf_nombrePais.getText(),
+                    Integer.parseInt(tf_medallasPais.getText()));
+
+            model.addElement(country);
+
+            // Archivo
+            try {
+                
+                aP.uploadFile();
+                aP.setPais(country);
+                aP.writeFile();
+                
+                JOptionPane.showMessageDialog(this, "Agregado exitosamente!");
+                
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "No se agrego ):");
+            }
+            
+            //Agregar al cb
+            cb_paises.setModel(model);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrio un error y no se pudo agregar", "Error", JOptionPane.ERROR);
+
+        }
+
     }//GEN-LAST:event_btn_addPaisMouseClicked
 
     private void btn_agregarNadadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_agregarNadadorMouseClicked
-        
+
         //Agregar al combobox y a la tabla
         DefaultComboBoxModel model = (DefaultComboBoxModel) cb_nadadores.getModel();
         DefaultTableModel tModel = (DefaultTableModel) jt_nadadores.getModel();
-        
-        
-        Nadador swimmer = new Nadador(
-                tf_nombreNadador.getText(), 
-                (Pais)cb_paises.getSelectedItem(), 
-                Integer.parseInt(tf_edad.getText()), 
-                Integer.parseInt(tf_medallasNadador.getText()), 
-                Double.parseDouble(tf_estatura.getText()), 
-                (String)cb_estilosNadador.getSelectedItem(), 
-                Double.parseDouble((String)cb_distanciaNadador.getSelectedItem()), 
-                Double.parseDouble(tf_tiempo.getText()));
-        
-        model.addElement(swimmer);
-        
-        Object [] row = {
-            swimmer.getNombre(), 
-            swimmer.getNacionalidad(), 
-            swimmer.getEdad(), 
-            swimmer.getMedallas(), 
-            swimmer.getEstatura(), 
-            swimmer.getEstiloNatacion(),
-            swimmer.getDistanciaACompetir(),
-            swimmer.getTiempo()};
-        
-        tModel.addRow(row);
-        
-        //Agregar nadador al pais seleccionado
-        paisAdd = (Pais)cb_paises.getSelectedItem();
-        paisAdd.getNadadores().add(swimmer);
-        
-        //DefaultComboBoxModel modelPais = (DefaultComboBoxModel) cb_nadadores.getModel();
-        
-        jt_nadadores.setModel(tModel);
-        cb_nadadores.setModel(model);
-        
-        JOptionPane.showMessageDialog(this, "Agregado exitosamente!");
-        
-        
+
+        try {
+
+            Nadador swimmer = new Nadador(
+                    tf_nombreNadador.getText(),
+                    (Pais) cb_paises.getSelectedItem(),
+                    Integer.parseInt(tf_edad.getText()),
+                    Integer.parseInt(tf_medallasNadador.getText()),
+                    Double.parseDouble(tf_estatura.getText()),
+                    (String) cb_estilosNadador.getSelectedItem(),
+                    Double.parseDouble((String) cb_distanciaNadador.getSelectedItem()),
+                    Double.parseDouble(tf_tiempo.getText()));
+
+            model.addElement(swimmer);
+
+            Object[] row = {
+                swimmer.getNombre(),
+                swimmer.getNacionalidad(),
+                swimmer.getEdad(),
+                swimmer.getMedallas(),
+                swimmer.getEstatura(),
+                swimmer.getEstiloNatacion(),
+                swimmer.getDistanciaACompetir(),
+                swimmer.getTiempo()};
+
+            tModel.addRow(row);
+
+            //Agregar nadador al pais seleccionado
+            paisAdd = (Pais) cb_paises.getSelectedItem();
+            paisAdd.getNadadores().add(swimmer);
+
+            //DefaultComboBoxModel modelPais = (DefaultComboBoxModel) cb_nadadores.getModel();
+            jt_nadadores.setModel(tModel);
+            cb_nadadores.setModel(model);
+
+            JOptionPane.showMessageDialog(this, "Agregado exitosamente!");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrio un error y no se pudo agregar", "Error", JOptionPane.ERROR);
+
+        }
+
+
     }//GEN-LAST:event_btn_agregarNadadorMouseClicked
 
     private void btn_agregarEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_agregarEventoMouseClicked
         DefaultTableModel tModel = (DefaultTableModel) jt_eventos.getModel();
-        
+
         Evento event = new Evento(
-                (String)cb_estilos.getSelectedItem(), 
-                Long.parseLong((String)cb_distancias.getSelectedItem()));
-        
-        Object [] row = {event.getEstilo(), event.getDistancia()};
-        
+                (String) cb_estilos.getSelectedItem(),
+                Long.parseLong((String) cb_distancias.getSelectedItem()));
+
+        Object[] row = {event.getEstilo(), event.getDistancia()};
+
         tModel.addRow(row);
-        
+
         jt_eventos.setModel(tModel);
     }//GEN-LAST:event_btn_agregarEventoMouseClicked
 
-   
     public static void main(String args[]) {
-        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -508,7 +481,20 @@ public class Main extends javax.swing.JFrame {
         });
     }
     
+    //metodo para llenar combobox
+    public void llenarCbPaises(){
+        aP.uploadFile();
+        paises = aP.getListaPaises();
+        
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cb_paises.getModel();
+        model.addAll(paises);
+        
+        cb_paises.setModel(model);
+    }
+
     Pais paisAdd = null;
+    adminPais aP = new adminPais("./paises.karu");
+    ArrayList<Pais> paises = new ArrayList<>();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_addPais;
