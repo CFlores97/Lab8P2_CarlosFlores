@@ -11,14 +11,22 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         setLocationRelativeTo(null);
-        llenarCbPaises();
-        
+        llenarPaises();
+        llenarNadadores();
+        llenarTablaEventos();
+
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pm_crudNadadores = new javax.swing.JPopupMenu();
+        mi_modificar = new javax.swing.JMenuItem();
+        mi_eliminar = new javax.swing.JMenuItem();
+        pm_crudEventos = new javax.swing.JPopupMenu();
+        mi_modificarE = new javax.swing.JMenuItem();
+        mi_eliminarE = new javax.swing.JMenuItem();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -59,6 +67,28 @@ public class Main extends javax.swing.JFrame {
         cb_distanciaNadador = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jt_nadadores = new javax.swing.JTable();
+
+        mi_modificar.setText("Modificar");
+        pm_crudNadadores.add(mi_modificar);
+
+        mi_eliminar.setText("Eliminar");
+        mi_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mi_eliminarActionPerformed(evt);
+            }
+        });
+        pm_crudNadadores.add(mi_eliminar);
+
+        mi_modificarE.setText("Modificar");
+        pm_crudEventos.add(mi_modificarE);
+
+        mi_eliminarE.setText("Eliminar");
+        mi_eliminarE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mi_eliminarEActionPerformed(evt);
+            }
+        });
+        pm_crudEventos.add(mi_eliminarE);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -158,6 +188,11 @@ public class Main extends javax.swing.JFrame {
                 "Estilo", "Distancia"
             }
         ));
+        jt_eventos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jt_eventosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jt_eventos);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -248,6 +283,11 @@ public class Main extends javax.swing.JFrame {
                 "Nombre", "Medallas", "Nacionalidad", "Edad", "Estatura", "Estilo", "Distancia", "Tiempo"
             }
         ));
+        jt_nadadores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jt_nadadoresMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jt_nadadores);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -368,17 +408,17 @@ public class Main extends javax.swing.JFrame {
 
             // Archivo
             try {
-                
+
                 aP.uploadFile();
                 aP.setPais(country);
                 aP.writeFile();
-                
+
                 JOptionPane.showMessageDialog(this, "Agregado exitosamente!");
-                
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "No se agrego ):");
             }
-            
+
             //Agregar al cb
             cb_paises.setModel(model);
 
@@ -407,6 +447,18 @@ public class Main extends javax.swing.JFrame {
                     Double.parseDouble((String) cb_distanciaNadador.getSelectedItem()),
                     Double.parseDouble(tf_tiempo.getText()));
 
+            // Agregar al archivo
+            try {
+                aN.uploadFile();
+                aN.setNadador(swimmer);
+                aN.writeFile();
+
+                JOptionPane.showMessageDialog(this, "Agregado al archivo exitosamente!");
+            } catch (Exception e) {
+
+            }
+
+            // tabla
             model.addElement(swimmer);
 
             Object[] row = {
@@ -448,10 +500,71 @@ public class Main extends javax.swing.JFrame {
 
         Object[] row = {event.getEstilo(), event.getDistancia()};
 
+        try {
+            aE.uploadFile();
+            aE.setEvento(event);
+            aE.writeFile();
+
+            JOptionPane.showMessageDialog(this, "Agregado al archivo exitosamente!");
+        } catch (Exception e) {
+        }
+
         tModel.addRow(row);
 
         jt_eventos.setModel(tModel);
     }//GEN-LAST:event_btn_agregarEventoMouseClicked
+
+    private void jt_nadadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_nadadoresMouseClicked
+        if (evt.isMetaDown()) {
+            pm_crudNadadores.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jt_nadadoresMouseClicked
+
+    private void mi_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_eliminarActionPerformed
+        DefaultTableModel modeloTabla = (DefaultTableModel) jt_nadadores.getModel();
+
+        int rowToElim = jt_nadadores.getSelectedRow();
+
+        modeloTabla.removeRow(rowToElim);
+
+        JOptionPane.showMessageDialog(this, "Eliminado!");
+        
+        try {
+            aN.uploadFile();
+            aN.getListaNadadores().remove(rowToElim);
+            
+            aN.writeFile();
+        } catch (Exception e) {
+        }
+
+        jt_nadadores.setModel(modeloTabla);
+    }//GEN-LAST:event_mi_eliminarActionPerformed
+
+    private void jt_eventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_eventosMouseClicked
+        if (evt.isMetaDown()) {
+            pm_crudEventos.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jt_eventosMouseClicked
+
+    private void mi_eliminarEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_eliminarEActionPerformed
+        DefaultTableModel modeloTabla = (DefaultTableModel) jt_eventos.getModel();
+
+        int rowToElim = jt_eventos.getSelectedRow();
+
+        modeloTabla.removeRow(rowToElim);
+
+        JOptionPane.showMessageDialog(this, "Eliminado!");
+        
+        try {
+            aE.uploadFile();
+            aE.getListaEventos().remove(rowToElim);
+            
+            aE.writeFile();
+        } catch (Exception e) {
+        }
+
+        jt_eventos.setModel(modeloTabla);
+    }//GEN-LAST:event_mi_eliminarEActionPerformed
 
     public static void main(String args[]) {
 
@@ -480,21 +593,73 @@ public class Main extends javax.swing.JFrame {
             }
         });
     }
-    
+
     //metodo para llenar combobox
-    public void llenarCbPaises(){
+    public void llenarPaises() {
         aP.uploadFile();
         paises = aP.getListaPaises();
-        
+
         DefaultComboBoxModel model = (DefaultComboBoxModel) cb_paises.getModel();
         model.addAll(paises);
-        
+
         cb_paises.setModel(model);
     }
 
+    public void llenarNadadores() {
+        aN.uploadFile();
+        nadadores = aN.getListaNadadores();
+
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cb_nadadores.getModel();
+        DefaultTableModel tableModel = (DefaultTableModel) jt_nadadores.getModel();
+
+        //Add CB
+        model.addAll(nadadores);
+
+        //Add table
+        for (Nadador nadador : nadadores) {
+            Object[] tempRow = {
+                nadador.getNombre(),
+                nadador.getNacionalidad(),
+                nadador.getEdad(),
+                nadador.getMedallas(),
+                nadador.getEstatura(),
+                nadador.getEstiloNatacion(),
+                nadador.getDistanciaACompetir(),
+                nadador.getTiempo()};
+
+            tableModel.addRow(tempRow);
+        }
+
+        cb_nadadores.setModel(model);
+        jt_nadadores.setModel(tableModel);
+    }
+
+    public void llenarTablaEventos() {
+        aE.uploadFile();
+        eventos = aE.getListaEventos();
+
+        DefaultTableModel model = (DefaultTableModel) jt_eventos.getModel();
+
+        for (Evento evento : eventos) {
+            Object[] tempRow = {evento.getEstilo(), evento.getDistancia()};
+
+            model.addRow(tempRow);
+
+        }
+
+        jt_eventos.setModel(model);
+    }
+
     Pais paisAdd = null;
+
     adminPais aP = new adminPais("./paises.karu");
+    adminEvento aE = new adminEvento("./eventos.karu");
+    adminNadador aN = new adminNadador("./nadadores.karu");
+
     ArrayList<Pais> paises = new ArrayList<>();
+    ArrayList<Evento> eventos = new ArrayList<>();
+    ArrayList<Nadador> nadadores = new ArrayList<>();
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_addPais;
@@ -530,6 +695,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jt_eventos;
     private javax.swing.JTable jt_nadadores;
+    private javax.swing.JMenuItem mi_eliminar;
+    private javax.swing.JMenuItem mi_eliminarE;
+    private javax.swing.JMenuItem mi_modificar;
+    private javax.swing.JMenuItem mi_modificarE;
+    private javax.swing.JPopupMenu pm_crudEventos;
+    private javax.swing.JPopupMenu pm_crudNadadores;
     private javax.swing.JTextField tf_edad;
     private javax.swing.JTextField tf_estatura;
     private javax.swing.JTextField tf_medallasNadador;
