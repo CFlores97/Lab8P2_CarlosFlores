@@ -101,6 +101,11 @@ public class Main extends javax.swing.JFrame {
         pm_crudEventos.add(mi_modificarE);
 
         mi_eliminarE.setText("Eliminar");
+        mi_eliminarE.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mi_eliminarEMouseClicked(evt);
+            }
+        });
         mi_eliminarE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mi_eliminarEActionPerformed(evt);
@@ -675,10 +680,15 @@ public class Main extends javax.swing.JFrame {
         DefaultTableModel tModel = (DefaultTableModel) jt_nadadores.getModel();
 
         int selRow = jt_eventos.getSelectedRow();
+        
+        String estilo = JOptionPane.showInputDialog("Ingrese el estilo (Libre, Pecho, Dorso, Mariposa)");
+        long distancia = Long.parseLong(JOptionPane.showInputDialog("Ingrese distancia"));
     }//GEN-LAST:event_mi_modificarEActionPerformed
 
     private void jt_nadadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_nadadoresMouseClicked
-        // TODO add your handling code here:
+       if (evt.isMetaDown()) {
+            pm_crudNadadores.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
     }//GEN-LAST:event_jt_nadadoresMouseClicked
 
     private void cb_nadadoresPaisItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_nadadoresPaisItemStateChanged
@@ -772,6 +782,10 @@ public class Main extends javax.swing.JFrame {
             sel3 = true;
         }
     }//GEN-LAST:event_cb_nad3ItemStateChanged
+
+    private void mi_eliminarEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mi_eliminarEMouseClicked
+        
+    }//GEN-LAST:event_mi_eliminarEMouseClicked
 
     public static void main(String args[]) {
 
