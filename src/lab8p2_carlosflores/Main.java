@@ -699,6 +699,8 @@ public class Main extends javax.swing.JFrame {
         } catch (Exception e) {
         }
         
+        llenarTablaEventos();
+        
         jt_eventos.setModel(tModel);
     }//GEN-LAST:event_mi_modificarEActionPerformed
 
