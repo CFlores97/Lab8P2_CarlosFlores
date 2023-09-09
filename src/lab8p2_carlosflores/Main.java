@@ -15,8 +15,9 @@ public class Main extends javax.swing.JFrame {
         llenarNadadores();
         llenarEventos();
         llenarTablaEventos();
+        hS = new HiloSimu(pb_1);
         
-        hS = new HiloSimu(pb_1, (Nadador)cb_nad1.getSelectedItem());
+        
 
     }
 
@@ -724,7 +725,9 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         try {
-            hS.setAvanzar(true);
+            
+            
+            hS.start();
 
         } catch (Exception e) {
         }

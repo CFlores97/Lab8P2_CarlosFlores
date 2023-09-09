@@ -13,11 +13,11 @@ public class HiloSimu extends Thread{
     private boolean vive;
     private Nadador nadador = new Nadador();
     
-    public HiloSimu(JProgressBar barra, Nadador a) {
+    public HiloSimu(JProgressBar barra) {
         this.barra = barra;
         avanzar=true;
         vive=true;
-        this.nadador = a;
+        //this.nadador = a;
     }
 
     public JProgressBar getBarra() {
@@ -49,8 +49,8 @@ public class HiloSimu extends Thread{
         while(vive){
             if(avanzar){
                 Random ran = new Random();
-                int randomValue = ran.nextInt();
-                barra.setValue((int)nadador.getDistanciaACompetir() + randomValue);
+                int randomValue = ran.nextInt(10);
+                barra.setValue( barra.getValue() + randomValue);
             } 
             
             try {
