@@ -15,6 +15,8 @@ public class Main extends javax.swing.JFrame {
         llenarNadadores();
         llenarEventos();
         llenarTablaEventos();
+        
+        hS = new HiloSimu(pb_1, (Nadador)cb_nad1.getSelectedItem());
 
     }
 
@@ -424,6 +426,11 @@ public class Main extends javax.swing.JFrame {
         cb_nad3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         jButton1.setText("Empezar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -556,15 +563,14 @@ public class Main extends javax.swing.JFrame {
                 } catch (Exception e) {
 
                 }
-                
+
                 llenarNadadores();
                 selPais.getNadadores().add(swimmer);
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "No se pueden agregar mas de dos nadadores al pais");
             }
 
             //JOptionPane.showMessageDialog(this, "Agregado exitosamente!");
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ocurrio un error y no se pudo agregar", "Error", JOptionPane.ERROR);
 
@@ -582,7 +588,7 @@ public class Main extends javax.swing.JFrame {
         Evento event = new Evento(
                 (String) cb_estilos.getSelectedItem(),
                 Long.parseLong((String) cb_distancias.getSelectedItem()));
-        
+
         cbModel.addElement(event);
         cbModel1.addElement(event);
         cbModel2.addElement(event);
@@ -602,7 +608,6 @@ public class Main extends javax.swing.JFrame {
         cb_nad2.setModel(cbModel1);
         cb_nad3.setModel(cbModel2);
         tModel.addRow(row);
-        
 
         jt_eventos.setModel(tModel);
     }//GEN-LAST:event_btn_agregarEventoMouseClicked
@@ -670,6 +675,10 @@ public class Main extends javax.swing.JFrame {
         int paisSelected = cb_nadadoresPais.getSelectedIndex();
         DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_nadadoresPais.getModel();
 
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cb_nad1.getModel();
+        DefaultComboBoxModel model1 = (DefaultComboBoxModel) cb_nad2.getModel();
+        DefaultComboBoxModel model2 = (DefaultComboBoxModel) cb_nad3.getModel();
+
         while (modeloTabla.getRowCount() > 0) {
             modeloTabla.removeRow(0);
         }
@@ -689,11 +698,18 @@ public class Main extends javax.swing.JFrame {
                         n.getDistanciaACompetir(),
                         n.getTiempo()};
 
+                    model.addElement(n);
+                    model1.addElement(n);
+                    model2.addElement(n);
+
                     modeloTabla.addRow(row);
                 }
             }
 
             jt_nadadores.setModel(modeloTabla);
+            cb_nad1.setModel(model);
+            cb_nad2.setModel(model1);
+            cb_nad3.setModel(model2);
 
         } catch (Exception e) {
         }
@@ -701,17 +717,18 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_nadadoresPaisItemStateChanged
 
     private void cb_nad1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_nad1ItemStateChanged
+        
+
+
+    }//GEN-LAST:event_cb_nad1ItemStateChanged
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         try {
-            llenarEventos();
-            
-            
+            hS.setAvanzar(true);
+
         } catch (Exception e) {
         }
-        
-        
-        
-        
-    }//GEN-LAST:event_cb_nad1ItemStateChanged
+    }//GEN-LAST:event_jButton1MouseClicked
 
     public static void main(String args[]) {
 
@@ -757,20 +774,21 @@ public class Main extends javax.swing.JFrame {
     public void llenarNadadores() {
         aN.uploadFile();
         nadadores = aN.getListaNadadores();
-        
+
         DefaultComboBoxModel model = (DefaultComboBoxModel) cb_nad1.getModel();
         DefaultComboBoxModel model1 = (DefaultComboBoxModel) cb_nad2.getModel();
         DefaultComboBoxModel model2 = (DefaultComboBoxModel) cb_nad3.getModel();
-        
+
         model.addAll(nadadores);
         model1.addAll(nadadores);
         model2.addAll(nadadores);
-        
+
         cb_nad1.setModel(model);
         cb_nad2.setModel(model1);
         cb_nad3.setModel(model2);
 
     }
+
     public void llenarEventos() {
         aE.uploadFile();
         eventos = aE.getListaEventos();
@@ -802,7 +820,7 @@ public class Main extends javax.swing.JFrame {
     ArrayList<Pais> paises = new ArrayList<>();
     ArrayList<Evento> eventos = new ArrayList<>();
     ArrayList<Nadador> nadadores = new ArrayList<>();
-    
+
     HiloSimu hS;
 
 
