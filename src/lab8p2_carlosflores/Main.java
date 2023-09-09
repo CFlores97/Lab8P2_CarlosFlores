@@ -15,9 +15,10 @@ public class Main extends javax.swing.JFrame {
         llenarNadadores();
         llenarEventos();
         llenarTablaEventos();
+
         hS = new HiloSimu(pb_1);
-        
-        
+        hS1 = new HiloSimu(pb_2);
+        hS2 = new HiloSimu(pb_3);
 
     }
 
@@ -78,7 +79,7 @@ public class Main extends javax.swing.JFrame {
         cb_nad1 = new javax.swing.JComboBox<>();
         cb_nad2 = new javax.swing.JComboBox<>();
         cb_nad3 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        btn_beginRace = new javax.swing.JButton();
 
         mi_modificar.setText("Modificar");
         pm_crudNadadores.add(mi_modificar);
@@ -423,13 +424,23 @@ public class Main extends javax.swing.JFrame {
         });
 
         cb_nad2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cb_nad2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_nad2ItemStateChanged(evt);
+            }
+        });
 
         cb_nad3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cb_nad3.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_nad3ItemStateChanged(evt);
+            }
+        });
 
-        jButton1.setText("Empezar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_beginRace.setText("Empezar");
+        btn_beginRace.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btn_beginRaceMouseClicked(evt);
             }
         });
 
@@ -460,7 +471,7 @@ public class Main extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(381, 381, 381)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_beginRace, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -476,7 +487,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(pb_1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pb_2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_beginRace, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addComponent(pb_3, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(90, 90, 90))
@@ -718,20 +729,49 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_nadadoresPaisItemStateChanged
 
     private void cb_nad1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_nad1ItemStateChanged
-        
+        Nadador selSwim = (Nadador) cb_nad1.getSelectedItem();
 
-
+        if (selSwim != null) {
+            sel1 = true;
+        }
     }//GEN-LAST:event_cb_nad1ItemStateChanged
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btn_beginRaceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_beginRaceMouseClicked
         try {
-            
-            
-            hS.start();
+
+            if (sel1 && sel2) {
+                hS.start();
+                hS1.start();
+                
+            }
+            else if (sel1 && sel2 && sel3) {
+                hS.start();
+                hS1.start();
+                hS2.start();
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Debe elegir los nadadores!");
+            }
 
         } catch (Exception e) {
         }
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_btn_beginRaceMouseClicked
+
+    private void cb_nad2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_nad2ItemStateChanged
+        Nadador selSwim = (Nadador) cb_nad2.getSelectedItem();
+
+        if (selSwim != null) {
+            sel2 = true;
+        }
+    }//GEN-LAST:event_cb_nad2ItemStateChanged
+
+    private void cb_nad3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_nad3ItemStateChanged
+        Nadador selSwim = (Nadador) cb_nad3.getSelectedItem();
+
+        if (selSwim != null) {
+            sel3 = true;
+        }
+    }//GEN-LAST:event_cb_nad3ItemStateChanged
 
     public static void main(String args[]) {
 
@@ -825,12 +865,19 @@ public class Main extends javax.swing.JFrame {
     ArrayList<Nadador> nadadores = new ArrayList<>();
 
     HiloSimu hS;
+    HiloSimu hS1;
+    HiloSimu hS2;
+
+    Boolean sel1 = false;
+    Boolean sel2 = false;
+    Boolean sel3 = false;
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_addPais;
     private javax.swing.JButton btn_agregarEvento;
     private javax.swing.JButton btn_agregarNadador;
+    private javax.swing.JButton btn_beginRace;
     private javax.swing.JComboBox<String> cb_distanciaNadador;
     private javax.swing.JComboBox<String> cb_distancias;
     private javax.swing.JComboBox<String> cb_estilos;
@@ -840,7 +887,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_nad3;
     private javax.swing.JComboBox<String> cb_nadadoresPais;
     private javax.swing.JComboBox<String> cb_paises;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

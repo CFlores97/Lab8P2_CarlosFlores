@@ -51,6 +51,9 @@ public class HiloSimu extends Thread{
                 Random ran = new Random();
                 int randomValue = ran.nextInt(10);
                 barra.setValue( barra.getValue() + randomValue);
+                if(barra.getValue()==100000000){
+                    vive=false;
+                } 
             } 
             
             try {
