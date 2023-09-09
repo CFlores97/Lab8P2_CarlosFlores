@@ -683,6 +683,21 @@ public class Main extends javax.swing.JFrame {
         
         String estilo = JOptionPane.showInputDialog("Ingrese el estilo (Libre, Pecho, Dorso, Mariposa)");
         long distancia = Long.parseLong(JOptionPane.showInputDialog("Ingrese distancia"));
+        
+        Object [] row = {estilo, distancia};
+        
+        Evento tempEv = new Evento(estilo, distancia);
+        
+        tModel.addRow(row);
+        tModel.removeRow(selRow);
+        
+        try {
+            aE.uploadFile();
+            aE.getListaEventos().remove(selRow);
+            aE.getListaEventos().add(tempEv);
+            aE.writeFile();
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_mi_modificarEActionPerformed
 
     private void jt_nadadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_nadadoresMouseClicked
