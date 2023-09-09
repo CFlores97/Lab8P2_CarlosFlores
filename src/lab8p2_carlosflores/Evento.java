@@ -33,7 +33,7 @@ public class Evento implements Serializable {
 
     @Override
     public String toString() {
-        return "Evento{" + "estilo=" + estilo + ", distancia=" + distancia + '}';
+        return estilo;
     }
     
     

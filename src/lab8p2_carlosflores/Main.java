@@ -13,6 +13,7 @@ public class Main extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         llenarPaises();
         llenarNadadores();
+        llenarEventos();
         llenarTablaEventos();
 
     }
@@ -32,10 +33,8 @@ public class Main extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         tf_nombrePais = new javax.swing.JTextField();
         tf_medallasPais = new javax.swing.JTextField();
-        cb_nadadores = new javax.swing.JComboBox<>();
         btn_addPais = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -65,8 +64,17 @@ public class Main extends javax.swing.JFrame {
         btn_agregarNadador = new javax.swing.JButton();
         cb_estilosNadador = new javax.swing.JComboBox<>();
         cb_distanciaNadador = new javax.swing.JComboBox<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
         jt_nadadores = new javax.swing.JTable();
+        cb_nadadoresPais = new javax.swing.JComboBox<>();
+        jPanel5 = new javax.swing.JPanel();
+        pb_2 = new javax.swing.JProgressBar();
+        pb_1 = new javax.swing.JProgressBar();
+        pb_3 = new javax.swing.JProgressBar();
+        cb_eventos = new javax.swing.JComboBox<>();
+        cb_eventos1 = new javax.swing.JComboBox<>();
+        cb_eventos2 = new javax.swing.JComboBox<>();
 
         mi_modificar.setText("Modificar");
         pm_crudNadadores.add(mi_modificar);
@@ -80,6 +88,11 @@ public class Main extends javax.swing.JFrame {
         pm_crudNadadores.add(mi_eliminar);
 
         mi_modificarE.setText("Modificar");
+        mi_modificarE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mi_modificarEActionPerformed(evt);
+            }
+        });
         pm_crudEventos.add(mi_modificarE);
 
         mi_eliminarE.setText("Eliminar");
@@ -99,8 +112,6 @@ public class Main extends javax.swing.JFrame {
 
         jLabel2.setText("Medallas:");
 
-        jLabel3.setText("Nadadores:");
-
         btn_addPais.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_addPais.setText("Add");
         btn_addPais.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -119,11 +130,9 @@ public class Main extends javax.swing.JFrame {
                         .addGap(28, 28, 28)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(36, 36, 36)
+                            .addComponent(jLabel2))
+                        .addGap(47, 47, 47)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cb_nadadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tf_medallasPais, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tf_nombrePais, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -148,11 +157,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tf_medallasPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(cb_nadadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(84, 84, 84)
+                .addGap(150, 150, 150)
                 .addComponent(btn_addPais, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(219, Short.MAX_VALUE))
         );
@@ -275,21 +280,6 @@ public class Main extends javax.swing.JFrame {
         cb_distanciaNadador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "100", "200 ", "400", "800" }));
         cb_distanciaNadador.setSelectedIndex(-1);
 
-        jt_nadadores.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Nombre", "Medallas", "Nacionalidad", "Edad", "Estatura", "Estilo", "Distancia", "Tiempo"
-            }
-        ));
-        jt_nadadores.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jt_nadadoresMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jt_nadadores);
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -297,7 +287,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(281, 281, 281)
                 .addComponent(jLabel6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(417, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,9 +319,7 @@ public class Main extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addComponent(btn_agregarNadador, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(1, 1, 1))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,46 +327,140 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(tf_nombreNadador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(tf_nombreNadador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tf_medallasNadador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addGap(9, 9, 9)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(cb_paises, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(tf_edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(9, 9, 9)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(tf_estatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(9, 9, 9)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(cb_estilosNadador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(cb_distanciaNadador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(tf_tiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                    .addComponent(tf_medallasNadador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(cb_paises, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(tf_edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(tf_estatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(cb_estilosNadador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(cb_distanciaNadador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(tf_tiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addComponent(btn_agregarNadador, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(81, 81, 81))
         );
 
         jTabbedPane1.addTab("Nadadores", jPanel3);
+
+        jt_nadadores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Medallas", "Nacionalidad", "Edad", "Estatura", "Estilo", "Distancia", "Tiempo"
+            }
+        ));
+        jt_nadadores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jt_nadadoresMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jt_nadadores);
+
+        cb_nadadoresPais.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_nadadoresPaisItemStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(190, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(168, 168, 168))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(326, 326, 326)
+                .addComponent(cb_nadadoresPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(cb_nadadoresPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(136, 136, 136))
+        );
+
+        jTabbedPane1.addTab("Ver Nadadores", jPanel1);
+
+        cb_eventos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+
+        cb_eventos1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+
+        cb_eventos2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(pb_3, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(233, 233, 233))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(cb_eventos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(114, 114, 114)
+                        .addComponent(cb_eventos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pb_1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addComponent(pb_2, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(116, 116, 116)
+                        .addComponent(cb_eventos2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cb_eventos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_eventos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_eventos2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pb_1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pb_2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(105, 105, 105)
+                .addComponent(pb_3, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90))
+        );
+
+        jTabbedPane1.addTab("Simulacion", jPanel5);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -398,6 +480,7 @@ public class Main extends javax.swing.JFrame {
 
         //Agregar al combobox
         DefaultComboBoxModel model = (DefaultComboBoxModel) cb_paises.getModel();
+        DefaultComboBoxModel modelP = (DefaultComboBoxModel) cb_nadadoresPais.getModel();
 
         try {
             Pais country = new Pais(
@@ -405,6 +488,7 @@ public class Main extends javax.swing.JFrame {
                     Integer.parseInt(tf_medallasPais.getText()));
 
             model.addElement(country);
+            modelP.addElement(country);
 
             // Archivo
             try {
@@ -421,6 +505,7 @@ public class Main extends javax.swing.JFrame {
 
             //Agregar al cb
             cb_paises.setModel(model);
+            cb_nadadoresPais.setModel(modelP);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ocurrio un error y no se pudo agregar", "Error", JOptionPane.ERROR);
@@ -431,9 +516,8 @@ public class Main extends javax.swing.JFrame {
 
     private void btn_agregarNadadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_agregarNadadorMouseClicked
 
-        //Agregar al combobox y a la tabla
-        DefaultComboBoxModel model = (DefaultComboBoxModel) cb_nadadores.getModel();
-        DefaultTableModel tModel = (DefaultTableModel) jt_nadadores.getModel();
+        //Agregar a la lista de nadadores del pais
+        Pais selPais = (Pais) cb_paises.getSelectedItem();
 
         try {
 
@@ -447,41 +531,25 @@ public class Main extends javax.swing.JFrame {
                     Double.parseDouble((String) cb_distanciaNadador.getSelectedItem()),
                     Double.parseDouble(tf_tiempo.getText()));
 
-            // Agregar al archivo
-            try {
-                aN.uploadFile();
-                aN.setNadador(swimmer);
-                aN.writeFile();
+            if (selPais.getNadadores().size() < 2) {
+                // Agregar al archivo
+                try {
+                    aN.uploadFile();
+                    aN.setNadador(swimmer);
+                    aN.writeFile();
 
-                JOptionPane.showMessageDialog(this, "Agregado al archivo exitosamente!");
-            } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Agregado al archivo exitosamente!");
+                } catch (Exception e) {
 
+                }
+                
+                llenarNadadores();
+                selPais.getNadadores().add(swimmer);
+            }else{
+                JOptionPane.showMessageDialog(this, "No se pueden agregar mas de dos nadadores al pais");
             }
 
-            // tabla
-            model.addElement(swimmer);
-
-            Object[] row = {
-                swimmer.getNombre(),
-                swimmer.getNacionalidad(),
-                swimmer.getEdad(),
-                swimmer.getMedallas(),
-                swimmer.getEstatura(),
-                swimmer.getEstiloNatacion(),
-                swimmer.getDistanciaACompetir(),
-                swimmer.getTiempo()};
-
-            tModel.addRow(row);
-
-            //Agregar nadador al pais seleccionado
-            paisAdd = (Pais) cb_paises.getSelectedItem();
-            paisAdd.getNadadores().add(swimmer);
-
-            //DefaultComboBoxModel modelPais = (DefaultComboBoxModel) cb_nadadores.getModel();
-            jt_nadadores.setModel(tModel);
-            cb_nadadores.setModel(model);
-
-            JOptionPane.showMessageDialog(this, "Agregado exitosamente!");
+            //JOptionPane.showMessageDialog(this, "Agregado exitosamente!");
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ocurrio un error y no se pudo agregar", "Error", JOptionPane.ERROR);
@@ -493,10 +561,17 @@ public class Main extends javax.swing.JFrame {
 
     private void btn_agregarEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_agregarEventoMouseClicked
         DefaultTableModel tModel = (DefaultTableModel) jt_eventos.getModel();
+        DefaultComboBoxModel cbModel = (DefaultComboBoxModel) cb_eventos.getModel();
+        DefaultComboBoxModel cbModel1 = (DefaultComboBoxModel) cb_eventos1.getModel();
+        DefaultComboBoxModel cbModel2 = (DefaultComboBoxModel) cb_eventos2.getModel();
 
         Evento event = new Evento(
                 (String) cb_estilos.getSelectedItem(),
                 Long.parseLong((String) cb_distancias.getSelectedItem()));
+        
+        cbModel.addElement(event);
+        cbModel1.addElement(event);
+        cbModel2.addElement(event);
 
         Object[] row = {event.getEstilo(), event.getDistancia()};
 
@@ -509,16 +584,14 @@ public class Main extends javax.swing.JFrame {
         } catch (Exception e) {
         }
 
+        cb_eventos.setModel(cbModel);
+        cb_eventos1.setModel(cbModel1);
+        cb_eventos2.setModel(cbModel2);
         tModel.addRow(row);
+        
 
         jt_eventos.setModel(tModel);
     }//GEN-LAST:event_btn_agregarEventoMouseClicked
-
-    private void jt_nadadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_nadadoresMouseClicked
-        if (evt.isMetaDown()) {
-            pm_crudNadadores.show(evt.getComponent(), evt.getX(), evt.getY());
-        }
-    }//GEN-LAST:event_jt_nadadoresMouseClicked
 
     private void mi_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_eliminarActionPerformed
         DefaultTableModel modeloTabla = (DefaultTableModel) jt_nadadores.getModel();
@@ -528,11 +601,11 @@ public class Main extends javax.swing.JFrame {
         modeloTabla.removeRow(rowToElim);
 
         JOptionPane.showMessageDialog(this, "Eliminado!");
-        
+
         try {
             aN.uploadFile();
             aN.getListaNadadores().remove(rowToElim);
-            
+
             aN.writeFile();
         } catch (Exception e) {
         }
@@ -554,17 +627,64 @@ public class Main extends javax.swing.JFrame {
         modeloTabla.removeRow(rowToElim);
 
         JOptionPane.showMessageDialog(this, "Eliminado!");
-        
+
         try {
             aE.uploadFile();
             aE.getListaEventos().remove(rowToElim);
-            
+
             aE.writeFile();
         } catch (Exception e) {
+
         }
 
         jt_eventos.setModel(modeloTabla);
     }//GEN-LAST:event_mi_eliminarEActionPerformed
+
+    private void mi_modificarEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_modificarEActionPerformed
+        DefaultTableModel tModel = (DefaultTableModel) jt_nadadores.getModel();
+
+
+    }//GEN-LAST:event_mi_modificarEActionPerformed
+
+    private void jt_nadadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_nadadoresMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jt_nadadoresMouseClicked
+
+    private void cb_nadadoresPaisItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_nadadoresPaisItemStateChanged
+        DefaultTableModel modeloTabla = (DefaultTableModel) jt_nadadores.getModel();
+
+        int paisSelected = cb_nadadoresPais.getSelectedIndex();
+        DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_nadadoresPais.getModel();
+
+        while (modeloTabla.getRowCount() > 0) {
+            modeloTabla.removeRow(0);
+        }
+        try {
+
+            String nombrePais = modelo.getElementAt(paisSelected).toString();
+
+            for (Nadador n : nadadores) {
+                if (n.getNacionalidad().getNombre().equals(nombrePais)) {
+                    Object[] row = {
+                        n.getNombre(),
+                        n.getNacionalidad(),
+                        n.getEdad(),
+                        n.getMedallas(),
+                        n.getEstatura(),
+                        n.getEstiloNatacion(),
+                        n.getDistanciaACompetir(),
+                        n.getTiempo()};
+
+                    modeloTabla.addRow(row);
+                }
+            }
+
+            jt_nadadores.setModel(modeloTabla);
+
+        } catch (Exception e) {
+        }
+
+    }//GEN-LAST:event_cb_nadadoresPaisItemStateChanged
 
     public static void main(String args[]) {
 
@@ -600,38 +720,33 @@ public class Main extends javax.swing.JFrame {
         paises = aP.getListaPaises();
 
         DefaultComboBoxModel model = (DefaultComboBoxModel) cb_paises.getModel();
+        DefaultComboBoxModel model2 = (DefaultComboBoxModel) cb_nadadoresPais.getModel();
         model.addAll(paises);
-
+        model2.addAll(paises);
         cb_paises.setModel(model);
+        cb_nadadoresPais.setModel(model2);
     }
 
     public void llenarNadadores() {
         aN.uploadFile();
         nadadores = aN.getListaNadadores();
 
-        DefaultComboBoxModel model = (DefaultComboBoxModel) cb_nadadores.getModel();
-        DefaultTableModel tableModel = (DefaultTableModel) jt_nadadores.getModel();
+    }
+    public void llenarEventos() {
+        aE.uploadFile();
+        eventos = aE.getListaEventos();
+        
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cb_eventos.getModel();
+        DefaultComboBoxModel model1 = (DefaultComboBoxModel) cb_eventos1.getModel();
+        DefaultComboBoxModel model2 = (DefaultComboBoxModel) cb_eventos2.getModel();
+        
+        model.addAll(eventos);
+        model1.addAll(eventos);
+        model2.addAll(eventos);
+        
+        cb_eventos.setModel(model);
+        
 
-        //Add CB
-        model.addAll(nadadores);
-
-        //Add table
-        for (Nadador nadador : nadadores) {
-            Object[] tempRow = {
-                nadador.getNombre(),
-                nadador.getNacionalidad(),
-                nadador.getEdad(),
-                nadador.getMedallas(),
-                nadador.getEstatura(),
-                nadador.getEstiloNatacion(),
-                nadador.getDistanciaACompetir(),
-                nadador.getTiempo()};
-
-            tableModel.addRow(tempRow);
-        }
-
-        cb_nadadores.setModel(model);
-        jt_nadadores.setModel(tableModel);
     }
 
     public void llenarTablaEventos() {
@@ -669,7 +784,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_distancias;
     private javax.swing.JComboBox<String> cb_estilos;
     private javax.swing.JComboBox<String> cb_estilosNadador;
-    private javax.swing.JComboBox<String> cb_nadadores;
+    private javax.swing.JComboBox<String> cb_eventos;
+    private javax.swing.JComboBox<String> cb_eventos1;
+    private javax.swing.JComboBox<String> cb_eventos2;
+    private javax.swing.JComboBox<String> cb_nadadoresPais;
     private javax.swing.JComboBox<String> cb_paises;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -680,18 +798,19 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jt_eventos;
     private javax.swing.JTable jt_nadadores;
@@ -699,6 +818,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem mi_eliminarE;
     private javax.swing.JMenuItem mi_modificar;
     private javax.swing.JMenuItem mi_modificarE;
+    private javax.swing.JProgressBar pb_1;
+    private javax.swing.JProgressBar pb_2;
+    private javax.swing.JProgressBar pb_3;
     private javax.swing.JPopupMenu pm_crudEventos;
     private javax.swing.JPopupMenu pm_crudNadadores;
     private javax.swing.JTextField tf_edad;
