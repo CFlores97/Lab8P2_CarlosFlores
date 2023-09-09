@@ -72,9 +72,10 @@ public class Main extends javax.swing.JFrame {
         pb_2 = new javax.swing.JProgressBar();
         pb_1 = new javax.swing.JProgressBar();
         pb_3 = new javax.swing.JProgressBar();
-        cb_eventos = new javax.swing.JComboBox<>();
-        cb_eventos1 = new javax.swing.JComboBox<>();
-        cb_eventos2 = new javax.swing.JComboBox<>();
+        cb_nad1 = new javax.swing.JComboBox<>();
+        cb_nad2 = new javax.swing.JComboBox<>();
+        cb_nad3 = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         mi_modificar.setText("Modificar");
         pm_crudNadadores.add(mi_modificar);
@@ -411,11 +412,18 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Ver Nadadores", jPanel1);
 
-        cb_eventos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cb_nad1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cb_nad1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_nad1ItemStateChanged(evt);
+            }
+        });
 
-        cb_eventos1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cb_nad2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
-        cb_eventos2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cb_nad3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+
+        jButton1.setText("Empezar");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -429,9 +437,9 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(cb_eventos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cb_nad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(114, 114, 114)
-                        .addComponent(cb_eventos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cb_nad2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pb_1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -440,22 +448,28 @@ public class Main extends javax.swing.JFrame {
                         .addGap(36, 36, 36))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(116, 116, 116)
-                        .addComponent(cb_eventos2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cb_nad3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(381, 381, 381)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(121, 121, 121)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cb_eventos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_eventos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_eventos2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_nad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_nad2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_nad3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pb_1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pb_2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(105, 105, 105)
+                .addGap(33, 33, 33)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
                 .addComponent(pb_3, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(90, 90, 90))
         );
@@ -561,9 +575,9 @@ public class Main extends javax.swing.JFrame {
 
     private void btn_agregarEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_agregarEventoMouseClicked
         DefaultTableModel tModel = (DefaultTableModel) jt_eventos.getModel();
-        DefaultComboBoxModel cbModel = (DefaultComboBoxModel) cb_eventos.getModel();
-        DefaultComboBoxModel cbModel1 = (DefaultComboBoxModel) cb_eventos1.getModel();
-        DefaultComboBoxModel cbModel2 = (DefaultComboBoxModel) cb_eventos2.getModel();
+        DefaultComboBoxModel cbModel = (DefaultComboBoxModel) cb_nad1.getModel();
+        DefaultComboBoxModel cbModel1 = (DefaultComboBoxModel) cb_nad2.getModel();
+        DefaultComboBoxModel cbModel2 = (DefaultComboBoxModel) cb_nad3.getModel();
 
         Evento event = new Evento(
                 (String) cb_estilos.getSelectedItem(),
@@ -584,9 +598,9 @@ public class Main extends javax.swing.JFrame {
         } catch (Exception e) {
         }
 
-        cb_eventos.setModel(cbModel);
-        cb_eventos1.setModel(cbModel1);
-        cb_eventos2.setModel(cbModel2);
+        cb_nad1.setModel(cbModel);
+        cb_nad2.setModel(cbModel1);
+        cb_nad3.setModel(cbModel2);
         tModel.addRow(row);
         
 
@@ -643,7 +657,7 @@ public class Main extends javax.swing.JFrame {
     private void mi_modificarEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_modificarEActionPerformed
         DefaultTableModel tModel = (DefaultTableModel) jt_nadadores.getModel();
 
-
+        int selRow = jt_eventos.getSelectedRow();
     }//GEN-LAST:event_mi_modificarEActionPerformed
 
     private void jt_nadadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_nadadoresMouseClicked
@@ -685,6 +699,19 @@ public class Main extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_cb_nadadoresPaisItemStateChanged
+
+    private void cb_nad1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_nad1ItemStateChanged
+        try {
+            llenarEventos();
+            
+            
+        } catch (Exception e) {
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_cb_nad1ItemStateChanged
 
     public static void main(String args[]) {
 
@@ -730,22 +757,23 @@ public class Main extends javax.swing.JFrame {
     public void llenarNadadores() {
         aN.uploadFile();
         nadadores = aN.getListaNadadores();
+        
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cb_nad1.getModel();
+        DefaultComboBoxModel model1 = (DefaultComboBoxModel) cb_nad2.getModel();
+        DefaultComboBoxModel model2 = (DefaultComboBoxModel) cb_nad3.getModel();
+        
+        model.addAll(nadadores);
+        model1.addAll(nadadores);
+        model2.addAll(nadadores);
+        
+        cb_nad1.setModel(model);
+        cb_nad2.setModel(model1);
+        cb_nad3.setModel(model2);
 
     }
     public void llenarEventos() {
         aE.uploadFile();
         eventos = aE.getListaEventos();
-        
-        DefaultComboBoxModel model = (DefaultComboBoxModel) cb_eventos.getModel();
-        DefaultComboBoxModel model1 = (DefaultComboBoxModel) cb_eventos1.getModel();
-        DefaultComboBoxModel model2 = (DefaultComboBoxModel) cb_eventos2.getModel();
-        
-        model.addAll(eventos);
-        model1.addAll(eventos);
-        model2.addAll(eventos);
-        
-        cb_eventos.setModel(model);
-        
 
     }
 
@@ -774,6 +802,8 @@ public class Main extends javax.swing.JFrame {
     ArrayList<Pais> paises = new ArrayList<>();
     ArrayList<Evento> eventos = new ArrayList<>();
     ArrayList<Nadador> nadadores = new ArrayList<>();
+    
+    HiloSimu hS;
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -784,11 +814,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_distancias;
     private javax.swing.JComboBox<String> cb_estilos;
     private javax.swing.JComboBox<String> cb_estilosNadador;
-    private javax.swing.JComboBox<String> cb_eventos;
-    private javax.swing.JComboBox<String> cb_eventos1;
-    private javax.swing.JComboBox<String> cb_eventos2;
+    private javax.swing.JComboBox<String> cb_nad1;
+    private javax.swing.JComboBox<String> cb_nad2;
+    private javax.swing.JComboBox<String> cb_nad3;
     private javax.swing.JComboBox<String> cb_nadadoresPais;
     private javax.swing.JComboBox<String> cb_paises;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
